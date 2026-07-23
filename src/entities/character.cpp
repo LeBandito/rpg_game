@@ -19,6 +19,17 @@ void character::heal(const int& bruh) {
     }
 }
 
+void character::AddItemToInventory(const item& temporary, const int& position) {
+    if (weight_inventory + temporary.weight > max_weight_inventory) {
+        // Проработать ошибку: слишком большой вес
+    } else if (inventory[position].name == "empty") {
+        inventory[position] = temporary;
+        weight_inventory += temporary.weight;
+    } else {
+        // Проработать ошибку: нет свободной позиции
+    }
+}
+
 bool character::IsAlive() {
     if (hp <= 0)
         return false;

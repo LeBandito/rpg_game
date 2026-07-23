@@ -5,8 +5,9 @@
 
 struct item {
     std::string name;
-    std::array<std::string, 2> type{"weapon", "potion"};
+    std::array<std::string, 4> type{"weapon", "potion", "clothes", "empty"};
     int max_effect;
     int min_effect;
     int price;
+    int weight;
 };

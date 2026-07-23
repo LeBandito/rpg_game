@@ -13,6 +13,8 @@ protected:
     int shield;
     bool alive;
     std::array<item, 5> inventory;
+    int weight_inventory;
+    int max_weight_inventory;
 
 public:
     // Быстрый конструктор
@@ -23,6 +25,9 @@ public:
 
     // Лечение
     void heal(const int& bruh);
+
+    // Добавление элементов в инвентарь
+    void AddItemToInventory(const item& temporary, const int& position);
 
     // Проверка жизни
     bool IsAlive();
