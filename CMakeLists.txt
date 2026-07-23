@@ -1,15 +1,14 @@
 cmake_minimum_required(VERSION 3.20)
 project(RPG_Game)
 
-# Говорим использовать стандарт C++20 (или 17)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 20)
 
-# Добавляем все .cpp файлы
-set (SOURCES
+add_executable(RPG_Game
     src/main.cpp
-
+    src/game/game.cpp
+    src/battle/battle.cpp
+    src/entities/character.cpp
+    src/entities/player.cpp
+    src/entities/enemy.cpp
+    src/shop/shop.cpp
 )
-
-# Включаем поддержку отладки (для GDB)
-set(CMAKE_BUILD_TYPE Debug)
