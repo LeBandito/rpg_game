@@ -3,11 +3,11 @@
 #include <string>
 #include <array>
 
-struct item {
+class item {
+public:
     std::string name;
-    std::array<std::string, 4> type{"weapon", "potion", "clothes", "empty"};
-    int max_effect;
-    int min_effect;
+    // std::array<std::string, 4> type{"weapon", "potion", "clothes", "empty"};
+    std::string type;
     int price;
     int weight;
 };

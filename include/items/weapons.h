@@ -1,9 +1,11 @@
 #pragma once
 
+#include "items/items.h"
 #include <array>
 #include <string>
 
-struct weapon {
-    std::array<std::string, 3> type{"sword", "spear", "knife"};
-    
+class weapon : public item {
+    int min_damage;
+    int max_damage;
+    std::array<std::string, 4> effect{"fire", "toxin", "ice", "none"};
 };

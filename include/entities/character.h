@@ -11,10 +11,11 @@ protected:
     int hp;
     int max_hp;
     int shield;
-    bool alive;
+    int money;
     std::array<item, 5> inventory;
     int weight_inventory;
     int max_weight_inventory;
+    bool alive;
 
 public:
     // Быстрый конструктор
