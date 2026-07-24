@@ -19,17 +19,6 @@ void character::heal(const int& bruh) {
     }
 }
 
-void character::AddItemToInventory(const item& temporary, const int& position) {
-    if (weight_inventory + temporary.weight > max_weight_inventory) {
-        std::cout << "Too much weight..." << std::endl;
-    } else if (inventory[position].name == "empty") {
-        inventory[position] = temporary;
-        weight_inventory += temporary.weight;
-    } else {
-        std::cout << "The bag is full!" << std::endl;
-    }
-}
-
 bool character::IsAlive() {
     if (hp <= 0)
         return false;
