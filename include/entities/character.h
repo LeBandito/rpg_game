@@ -32,5 +32,12 @@ public:
     // Просмотр статистики
     void ShowStatistic();
 
+    // Просмотр инвентаря
+    void ShowInventory();
+
+    // Тот самый геттер для shop.h!
+    int GetMoney();
+    int GetHp();
+
     ~character() {}
 };

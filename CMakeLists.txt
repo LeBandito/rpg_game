@@ -14,4 +14,7 @@ add_executable(RPG_Game
 )
 
 # Для удобного поиска заголовочных файлов
-target_include_directories(RPG_Game PRIVATE include)
+target_include_directories(RPG_Game PRIVATE 
+    include
+    external
+)

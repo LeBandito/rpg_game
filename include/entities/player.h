@@ -9,7 +9,7 @@ protected:
     
 public:
     // Получать деньги
-    void GetMoney(const int& plus_money);
+    void SetMoney(const int& plus_money);
 
     // Тратить деньги
     void SpendMoney(const int& minus_money);
@@ -19,4 +19,7 @@ public:
 
     // Смена оружия
     void ChangeWeapon();
+
+    // Геттеры
+    std::pair<item, item> GetWeapon();
 };

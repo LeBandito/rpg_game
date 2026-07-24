@@ -1,6 +1,6 @@
 #include "entities/player.h"
 
-void player::GetMoney(const int& plus_money) {
+void player::SetMoney(const int& plus_money) {
     money += plus_money;
 }
 
@@ -29,7 +29,7 @@ void player::ChangeWeapon() {
     int new_player_weapon_id(0);
     std::cout << "What choose?" << std::endl;
     for (const item& I : inventory)
-        std::cout << I.name << ":\t" << I.type[0] << " | (" << I.min_effect << ", " << I.max_effect << ") | " << I.price << std::endl;
+        std::cout << I.name << ":\t" << I.type << " | (" << I.min_effect << ", " << I.max_effect << ") | " << I.price << " | " << I.weight << std::endl;
     std::cin >> new_player_weapon_id;
 
     if ((player_weapon_id == 1) && (inventory[new_player_weapon_id].type == "weapon")) {
@@ -37,4 +37,8 @@ void player::ChangeWeapon() {
     } else {
         std::cout << "Choose weapon!" << std::endl;
     }
+}
+
+std::pair<item, item> player::GetWeapon() {
+    return player_weapon;
 }

@@ -9,4 +9,7 @@ protected:
 public:
     // Отдать деньги после победы
     int ToGiveMoney();
+
+    // Геттеры
+    item GetWeapon();
 };

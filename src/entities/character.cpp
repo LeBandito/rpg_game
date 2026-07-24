@@ -28,7 +28,22 @@ bool character::IsAlive() {
 void character::ShowStatistic() {
     std::cout << "Name:\t" << name << std::endl;
     std::cout << "Hp:\t" << hp << std::endl;
+    std::cout << "Money:\t" << money << std::endl;
+    std::cout << "Alive:\t" << alive << std::endl;
+}
+
+void character::ShowInventory() {
     std::cout << "Inventory:" << std::endl;
-    for (const item& I : inventory)
-        std::cout << I.name << ":\t" << I.type[0] << " | (" << I.min_effect << ", " << I.max_effect << ") | " << I.price << std::endl;
+    for (int i = 0; i < inventory.size(); ++i)
+        std::cout << i + 1 << ") " << inventory[i].name << ":\t" << inventory[i].type << 
+        " | (" << inventory[i].min_effect << ", " << inventory[i].max_effect << ") | " << 
+        inventory[i].price << " | " << inventory[i].weight << std::endl;
+}
+
+int character::GetMoney() {
+    return money;
+}
+
+int character::GetHp() {
+    return hp;
 }
