@@ -18,7 +18,7 @@ protected:
 
 public:
     // Быстрый конструктор
-    character(std::string new_name, int new_hp, int new_max_hp, int new_shield, bool new_alive, std::array<item, 5> new_inventory);
+    character(std::string new_name, int new_hp, int new_max_hp, int new_shield, int new_money, std::array<item, 5> new_inventory, int new_max_weight_inventory, bool new_alive);
 
     // Урон
     void damage(const int& bruh);

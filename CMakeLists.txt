@@ -11,6 +11,7 @@ add_executable(RPG_Game
     src/entities/player.cpp
     src/entities/enemy.cpp
     src/shop/shop.cpp
+    src/utils/json_manager.cpp
 )
 
 # Для удобного поиска заголовочных файлов

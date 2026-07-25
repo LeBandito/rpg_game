@@ -1,7 +1,7 @@
 #include "entities/character.h"
 
-character::character(std::string new_name, int new_hp, int new_max_hp, int new_shield, bool new_alive, std::array<item, 5> new_inventory): 
-        name(new_name), hp(new_hp), max_hp(new_max_hp), shield(new_shield), alive(new_alive), inventory(new_inventory) {}
+character::character(std::string new_name, int new_hp, int new_max_hp, int new_shield, int new_money, std::array<item, 5> new_inventory, int new_max_weight_inventory, bool new_alive): 
+    name(new_name), hp(new_hp), max_hp(new_max_hp), shield(new_shield), money(new_money), alive(new_alive), inventory(new_inventory) {}
 
 void character::damage(const int& bruh) {
     if (hp - bruh <= 0) {
