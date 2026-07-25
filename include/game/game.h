@@ -14,11 +14,24 @@ protected:
 public:
     // Игровое меню
     void menu() {
-        // В будущем добавить возможность сохраненией!
-        std::cout << "Hello! It's RPG GAME!" << std::endl;
-        std::cout << "1) New game." << std::endl;
-        std::cout << "2) Continue." << std::endl;
-        std::cout << "3) Exit." << std::endl;
+        int choose(0);
+        while ((choose != 1) || (choose != 2) || (choose != 3)) {
+            // В будущем добавить возможность сохраненией!
+            std::cout << "Hello! It's RPG GAME!" << std::endl;
+            std::cout << "1) New game." << std::endl;
+            std::cout << "2) Continue." << std::endl;
+            std::cout << "3) Exit." << std::endl;
+        }
+
+        switch (choose)
+        {
+        case 1:
+            
+            break;
+        
+        default:
+            break;
+        }
     }
 
     // Создание персонажа

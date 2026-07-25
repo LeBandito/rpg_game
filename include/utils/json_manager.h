@@ -1,9 +1,10 @@
 #pragma once
 
-#include "json.hpp"
+#include <nlohmann/json.hpp>
 #include <fstream>
 #include <string>
 #include <iostream>
+
 using json = nlohmann::json;
 
 class JsonManager {

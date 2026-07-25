@@ -1,6 +1,5 @@
 #pragma once
 
-#include <nlohmann/json.hpp>
 #include "items/items.h"
 #include "entities/player.h"
 #include <array>
