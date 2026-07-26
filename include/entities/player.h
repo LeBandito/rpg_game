@@ -4,7 +4,8 @@
 
 class player : public character {
 protected:
-    std::pair<item, item> player_weapon;
+    item player_weapons_first;
+    item player_weapons_second;
     int weight_inventory;
     
 public:
@@ -20,6 +21,13 @@ public:
     // Смена оружия
     void ChangeWeapon();
 
+    // Сеттеры
+    void SetPlayerWeaponFirst(const item& new_player_weapons_first);
+    void SetPlayerWeaponSecond(const item& new_player_weapons_second);
+    void SetWeightInventory(const int& new_weight_inventory);
+
     // Геттеры
-    std::pair<item, item> GetWeapon();
+    item GetPlayerWeaponFirst();
+    item GetPlayerWeaponSecond();
+    int GetWeightInventory();
 };

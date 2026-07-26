@@ -10,6 +10,9 @@ public:
     // Отдать деньги после победы
     int ToGiveMoney();
 
+    // Сеттер
+    void SetWeapon(const item& new_enemy_weapon);
+
     // Геттеры
     item GetWeapon();
 };

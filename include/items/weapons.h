@@ -3,6 +3,6 @@
 #include "items/items.h"
 #include <string>
 
-class weapon : public item {
+class weapon {
     // "fire", "toxin", "ice", "none"
 };
