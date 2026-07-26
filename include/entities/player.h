@@ -1,16 +1,18 @@
 #pragma once
 
 #include "entities/character.h"
+#include "items/weapons.h"
 
 class player : public character {
 protected:
-    item player_weapons_first;
-    item player_weapons_second;
+    weapon player_weapon_first;
+    weapon player_weapon_second;
+    std::array<weapon, 2> player_weapons;
     int weight_inventory;
     
 public:
     // Получать деньги
-    void SetMoney(const int& plus_money);
+    void PlusMoney(const int& plus_money);
 
     // Тратить деньги
     void SpendMoney(const int& minus_money);
@@ -22,12 +24,14 @@ public:
     void ChangeWeapon();
 
     // Сеттеры
-    void SetPlayerWeaponFirst(const item& new_player_weapons_first);
-    void SetPlayerWeaponSecond(const item& new_player_weapons_second);
+    void SetPlayerWeaponFirst(const weapon& new_player_weapon_first);
+    void SetPlayerWeaponSecond(const weapon& new_player_weapon_first);
+    void SetPlayerWeapons(const std::array<weapon, 2>& new_player_weapons);
     void SetWeightInventory(const int& new_weight_inventory);
 
     // Геттеры
-    item GetPlayerWeaponFirst();
-    item GetPlayerWeaponSecond();
-    int GetWeightInventory();
+    weapon GetPlayerWeaponFirst() const;
+    weapon GetPlayerWeaponSecond() const;
+    std::array<weapon, 2> GetPlayerWeapons() const;
+    int GetWeightInventory() const;
 };

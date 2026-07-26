@@ -3,13 +3,30 @@
 #include <string>
 
 class item {
-public:
+protected:
+    int id;
     std::string name;
-    // std::array<std::string, 4> type{"weapon", "potion", "clothes", "empty"};
-    std::string type;
-    std::string effect;
-    int min_effect;
-    int max_effect;
+    std::string description;
     int price;
     int weight;
+
+public:
+    // Минимальный конструктор
+    item();
+    // Максимальный конструктор
+    item(const int& new_id, const std::string& new_name, const std::string& new_description, const int& new_price, const int& new_weight);
+
+    // Сеттеры
+    void SetId(const int& new_id);
+    void SetName(const std::string& new_name);
+    void SetDescription(const std::string& new_description);
+    void SetPrice(const int& new_price);
+    void SetWeight(const int& new_weight);
+
+    // Геттеры
+    int GetId() const;
+    std::string GetName() const;
+    std::string GetDescription() const;
+    int GetPrice() const;
+    int GetWeight() const;
 };

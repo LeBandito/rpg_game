@@ -1,18 +1,19 @@
 #pragma once
 
 #include "entities/character.h"
+#include "items/weapons.h"
 
 class enemy : public character {
 protected:
-    item enemy_weapon;
+    weapon enemy_weapon;
 
 public:
     // Отдать деньги после победы
     int ToGiveMoney();
 
     // Сеттер
-    void SetWeapon(const item& new_enemy_weapon);
+    void SetWeapon(const weapon& new_enemy_weapon);
 
     // Геттеры
-    item GetWeapon();
+    weapon GetWeapon() const;
 };

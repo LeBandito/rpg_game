@@ -8,13 +8,20 @@
 item JsonManager::FromJsonToItem(const json& data) {
     item bruh;
 
-    bruh.name = data["name"];
-    bruh.type = data["type"];
-    bruh.effect = data["effect"];
-    bruh.min_effect = data["min_effect"];
-    bruh.max_effect = data["max_effect"];
-    bruh.price = data["price"];
-    bruh.weight = data["weight"];
+    bruh.SetName(data["name"]);
+    bruh.SetDescription(data["description"]);
+    bruh.SetPrice(data["price"]);
+    bruh.SetWeight(data["weight"]);
+    
+    return bruh;
+}
+
+weapon JsonManager::FromJsonToWeapon(const json& data) {
+    weapon bruh;
+
+    bruh.SetMinDamage(data["min_damage"]);
+    bruh.SetMaxDamage(data["max_damage"]);
+    bruh.SetEffect(data["effect"]);
     
     return bruh;
 }
@@ -30,8 +37,9 @@ player JsonManager::FromJsonToPlayer(const json& data) {
     bruh.SetInventory(data["inventory"]);
     bruh.SetMaxWeightInventory(data["max_weight_inventory"]);
     bruh.SetAlive(data["alive"]);
-    bruh.SetPlayerWeaponFirst(FromJsonToItem(data["player_weapons_first"]));
-    bruh.SetPlayerWeaponSecond(FromJsonToItem(data["player_weapons_second"]));
+    bruh.SetPlayerWeaponFirst(FromJsonToWeapon(data["player_weapons_first"]));
+    bruh.SetPlayerWeaponSecond(FromJsonToWeapon(data["player_weapons_second"]));
+    bruh.SetPlayerWeapons(data["player_weapons_second"]);
     bruh.SetWeightInventory(data["weight_inventory"]);
 
     return bruh;
@@ -48,7 +56,7 @@ enemy JsonManager::FromJsonToEnemy(const json& data) {
     bruh.SetInventory(data["inventory"]);
     bruh.SetMaxWeightInventory(data["max_weight_inventory"]);
     bruh.SetAlive(data["alive"]);
-    bruh.SetWeapon(FromJsonToItem(data["enemy_weapon"]));
+    bruh.SetWeapon(FromJsonToWeapon(data["enemy_weapon"]));
 
     return bruh;
 }
@@ -57,13 +65,21 @@ enemy JsonManager::FromJsonToEnemy(const json& data) {
 json JsonManager::FromItemToJson(const item& data) {
     json bruh;
 
-    bruh["name"] = data.name;
-    bruh["type"] = data.type;
-    bruh["effect"] = data.effect;
-    bruh["min_effect"] = data.min_effect;
-    bruh["max_effect"] = data.max_effect;
-    bruh["price"] = data.price;
-    bruh["weight"] = data.weight;
+    bruh["id"] = data.GetId();
+    bruh["name"] = data.GetName();
+    bruh["description"] = data.GetDescription();
+    bruh["price"] = data.GetPrice();
+    bruh["weight"] = data.GetWeight();
+    
+    return bruh;
+}
+
+json JsonManager::FromWeaponToJson(const weapon& data) {
+    json bruh;
+
+    bruh["min_damage"] = data.GetMinDamage();
+    bruh["max_damage"] = data.GetMaxDamage();
+    bruh["effect"] = data.GetEffect();
     
     return bruh;
 }
@@ -79,15 +95,20 @@ json JsonManager::FromPlayerToJson(player& data) {
 
     // Особый случай - array
     json json_inventory = json::array();
-    for (item& item : data.GetInventory())
+    for (const item& item : data.GetInventory())
         json_inventory.push_back(FromItemToJson(item));
     
     bruh["inventory"] = json_inventory;
 
     bruh["max_weight_inventory"] = data.GetMaxWeightInventory();
     bruh["alive"] = data.GetAlive();
-    bruh["player_weapon_first"] = FromItemToJson(data.GetPlayerWeaponFirst());
-    bruh["player_weapon_second"] = FromItemToJson(data.GetPlayerWeaponSecond());
+    bruh["player_weapon_first"] = FromWeaponToJson(data.GetPlayerWeaponFirst());
+    bruh["player_weapon_second"] = FromWeaponToJson(data.GetPlayerWeaponSecond());
+
+    json json_player_weapons = json::array();
+    for (const weapon& p : data.GetPlayerWeapons())
+        json_player_weapons.push_back(FromWeaponToJson(p));
+
     bruh["weight_inventory"] = data.GetWeightInventory();
 
     return bruh;
@@ -104,14 +125,14 @@ json JsonManager::FromEnemyToJson(enemy& data) {
 
     // Особый случай - array
     json json_inventory = json::array();
-    for (item& item : data.GetInventory())
+    for (const item& item : data.GetInventory())
         json_inventory.push_back(FromItemToJson(item));
     
     bruh["inventory"] = json_inventory;
 
     bruh["max_weight_inventory"] = data.GetMaxWeightInventory();
     bruh["alive"] = data.GetAlive();
-    bruh["enemy_weapon"] = FromItemToJson(data.GetWeapon());
+    bruh["enemy_weapon"] = FromWeaponToJson(data.GetWeapon());
 
     return bruh;
 }
@@ -150,7 +171,7 @@ std::vector<item> JsonManager::LoadItems(const std::string& file_name) {
         file >> j;
         file.close();
 
-        for (const auto& idx : j)
+        for (const json& idx : j)
             game_items.push_back(FromJsonToItem(idx));
 
         return game_items;
@@ -174,7 +195,7 @@ std::array<enemy, 3> JsonManager::LoadEnemies(const std::string& file_name) {
         file.close();
 
         int i(0);
-        for (const auto& idx : j) {
+        for (const json& idx : j) {
             game_enemies[i] = FromJsonToEnemy(idx);
             ++i;
         }
@@ -224,7 +245,7 @@ void JsonManager::SaveEnemies(std::array<enemy, 3>& data, const std::string& fil
 
     json json_enemies = json::array();
     for (enemy& d : data) 
-        json_enemies = FromEnemyToJson(d);
+        json_enemies.push_back(FromEnemyToJson(d));
 
     file << json_enemies;
     file.close();

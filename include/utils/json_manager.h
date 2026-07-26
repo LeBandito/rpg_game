@@ -3,6 +3,7 @@
 #include "entities/player.h"
 #include "entities/enemy.h"
 #include "items/items.h"
+#include "items/weapons.h"
 
 #include <string>
 
@@ -14,11 +15,13 @@ class JsonManager {
 public:
     // Перевод из Json в наши классы
     item FromJsonToItem(const json& data);
+    weapon FromJsonToWeapon(const json& data);
     player FromJsonToPlayer(const json& data);
     enemy FromJsonToEnemy(const json& data);
 
     // Перевод из наших классов в Json
     json FromItemToJson(const item& data);
+    json FromWeaponToJson(const weapon& data);
     json FromPlayerToJson(player& data);
     json FromEnemyToJson(enemy& data); 
 

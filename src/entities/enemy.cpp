@@ -5,7 +5,7 @@ int enemy::ToGiveMoney() {
 }
 
 // Сеттер
-void enemy::SetWeapon(const item& new_enemy_weapon) { enemy_weapon = new_enemy_weapon; }
+void enemy::SetWeapon(const weapon& new_enemy_weapon) { enemy_weapon = new_enemy_weapon; }
 
 // Геттеры
-item enemy::GetWeapon() { return enemy_weapon; }
+weapon enemy::GetWeapon() const { return enemy_weapon; }

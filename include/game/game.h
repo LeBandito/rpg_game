@@ -12,37 +12,13 @@ protected:
     int idx_enemies;
 
 public:
-    // Игровое меню
-    void menu() {
-        int choose(0);
-        while ((choose != 1) || (choose != 2) || (choose != 3)) {
-            // В будущем добавить возможность сохраненией!
-            std::cout << "Hello! It's RPG GAME!" << std::endl;
-            std::cout << "1) New game." << std::endl;
-            std::cout << "2) Continue." << std::endl;
-            std::cout << "3) Exit." << std::endl;
-        }
-
-        switch (choose)
-        {
-        case 1:
-            
-            break;
-        
-        default:
-            break;
-        }
-    }
-
     // Создание персонажа
     void CreateHero() {
-        std::string new_name_hero;
-        std::cout << "Enter the name:\t" << std::endl;
-        std::cin >> new_name_hero;
-        // bruh. 
-    }
-
-    void StartGame() {
+        std::cout << "Welcome to the menu of creating hero!" << std::endl;
+        std::string new_name;
+        std::cout << "Give a name to youre character:\t" << std::endl;
+        std::cin >> new_name;
 
     }
+
 };

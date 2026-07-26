@@ -9,7 +9,6 @@ protected:
     std::string name;
     int hp;
     int max_hp;
-    int shield;
     int money;
     std::array<item, 5> inventory;
     int max_weight_inventory;
@@ -20,7 +19,7 @@ public:
     character();
 
     // Полный конструктор
-    character(const std::string& new_name, const int& new_hp, const int& new_max_hp, const int& new_shield, const int& new_money, 
+    character(const std::string& new_name, const int& new_hp, const int& new_max_hp, const int& new_money, 
         const std::array<item, 5>& new_inventory, const int& new_max_weight_inventory, const bool& new_alive);
 
     // Урон
