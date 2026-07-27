@@ -9,6 +9,12 @@ protected:
     int effect;
 
 public:
+    // Базовый конструктор
+    weapon();
+    // С параметрами
+    weapon(const int& new_id, const std::string& new_name, const std::string& new_description, const int& new_price, 
+        const int& new_weight, const int& new_min_damage, const int& new_max_damage, const int& new_effect);
+
     // Сеттеры
     void SetMinDamage(const int& new_min_damage);
     void SetMaxDamage(const int& new_max_damage);

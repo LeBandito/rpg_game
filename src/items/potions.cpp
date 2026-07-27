@@ -1,4 +1,4 @@
-#include "items/potion.h"
+#include "items/potions.h"
 
 // Сеттеры
 void potion::SetPermanentDamage(const int& new_permanent_damage) { permanent_damage = new_permanent_damage; }

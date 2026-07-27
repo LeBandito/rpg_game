@@ -7,18 +7,42 @@
 class game {
 protected:
     player bruh;
-    std::array<enemy, 3> enemies;
-    shop shopper;
+    std::vector<enemy> enemies;
     int idx_enemies;
+    shop shopper;
 
 public:
     // Создание персонажа
-    void CreateHero() {
-        std::cout << "Welcome to the menu of creating hero!" << std::endl;
-        std::string new_name;
-        std::cout << "Give a name to youre character:\t" << std::endl;
-        std::cin >> new_name;
+    void CreatePlayer();
 
-    }
+    // Загрузка данных
+    void LoadGamePlayer();
+    void LoadGameEnemy();
+    void LoadGameShop();
 
+    // Варианты меню
+    void NewGame();
+    void ContinueGame();
+    void ExitGame();
+
+    // Выбор оппонента
+    void FightSpecificEnemy();
+
+    // Игра
+    int StartGameMenu();
+    void GetChooseOfStartMenu(const int& idx);
+    int ContinueGameMenu();
+    void GetChooseOfContinueMenu(const int& idx);
+
+    // Сеттеры
+    void SetBruh(const player& new_bruh);
+    void SetEnemies(const std::vector<enemy>& new_enemies);
+    void SetIdxEnemies(const int& new_idx_enemies);
+    void SetShopper(const shop& new_shopper);
+
+    // Геттеры
+    player GetBruh() const;
+    std::vector<enemy> GetEnemies() const;
+    int GetIdxEnemies() const;
+    shop GetShopper() const;
 };

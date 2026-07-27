@@ -2,6 +2,20 @@
 
 #include <iostream>
 
+// Конструктор по умолчанию
+player::player() : character(), player_weapon_first(weapon()), player_weapon_second(weapon()), weight_inventory(0) {
+    for (int i = 0; i < player_weapons.size(); ++i)
+        player_weapons[i] = weapon();
+}
+
+// Конструктор с параметрами
+player::player(const std::string& new_name, const int& new_hp, const int& new_max_hp, const int& new_money, const std::array<item, 5>& new_inventory, 
+    const int& new_max_weight_inventory, const bool& new_alive, const weapon& new_player_weapon_first, const weapon& new_player_weapon_second, 
+    const std::array<weapon, 2>& new_player_weapons, const int& new_weight_inventory) : 
+    character(new_name, new_hp, new_max_hp, new_money, new_inventory, new_max_weight_inventory, new_alive), player_weapon_first(new_player_weapon_first), 
+    player_weapon_second(new_player_weapon_second), player_weapons(new_player_weapons), weight_inventory(new_weight_inventory) {} 
+
+
 void player::PlusMoney(const int& plus_money) {
     money += plus_money;
 }

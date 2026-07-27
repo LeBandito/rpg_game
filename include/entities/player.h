@@ -11,6 +11,13 @@ protected:
     int weight_inventory;
     
 public:
+    // Конструктор по умолчанию
+    player();
+    // Конструктор с параметрами
+    player(const std::string& new_name, const int& new_hp, const int& new_max_hp, const int& new_money, const std::array<item, 5>& new_inventory, 
+        const int& new_max_weight_inventory, const bool& new_alive, const weapon& new_player_weapon_first, const weapon& new_player_weapon_second, 
+        const std::array<weapon, 2>& new_player_weapons, const int& new_weight_inventory);
+
     // Получать деньги
     void PlusMoney(const int& plus_money);
 

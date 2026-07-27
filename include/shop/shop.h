@@ -3,44 +3,59 @@
 #include "items/items.h"
 #include "items/weapons.h"
 #include "items/clothes.h"
-#include "items/potion.h"
+#include "items/potions.h"
 #include "entities/player.h"
-#include <array>
+#include <vector>
 
 class shop {
 protected:
     // В будующем добаваить отдельно одежду, оружие, зелья, амулеты.
-    std::array<item, 20> shop_products;
-    std::array<weapon, 20> shop_weapons;
-    std::array<clothes, 20> shop_clothes;
-    std::array<potion, 20> shop_potions;
+    std::vector<item> shop_products;
+    std::vector<weapon> shop_weapons;
+    std::vector<clothes> shop_clothes;
+    std::vector<potion> shop_potions;
 
 public:
     // Просмотр товаров
-    void ShowProducts();
+    int ShowProducts();
     // Просмотр оружия
-    void ShowWeapons();
+    int ShowWeapons();
     // Просмотр одежды
-    void ShowClothes();
+    int ShowClothes();
     // Просмотр зелий
-    void ShowPotions();
+    int ShowPotions();
 
-    // Продажа товара
-    /* Ух! Это было круто! Я и забыл, что protected позволяет использовать поля только своему классу и наследникам, 
-    но shop-то не наследует! Поэтому создал get-тер в character.h! */
-    void SellProduct(const int& idx_products, const int& idx_inventory, player& bruh);
+    // Покупка товаров
+    void BuyProduct(const int& idx, player& bruh);
+    // Покупка оружия
+    void BuyWeapons(const int& idx, player& bruh);
+    // Покупка одежды
+    void BuyClothes(const int& idx, player& bruh);
+    // Покупка зелий
+    void BuyPotions(const int& idx, player& bruh);
 
     // Добавить возможность покупки товара!
 
+    int OptionMenu();
+    void ShopMove(const int& choose, player& bruh);
+
+    // Сам магазин
+    void GameShopping(player& bruh);
+
     // Сеттеры
-    void SetShopProducts(const std::array<item, 20>& new_shop_products);
-    void SetShopWeapons(const std::array<weapon, 20>& new_shop_weapons);
-    void SetShopClothes(const std::array<clothes, 20>& new_shop_clothes);
-    void SetShopPotions(const std::array<potion, 20>& new_shop_potions);
+    void SetShopProducts(const std::vector<item>& new_shop_products);
+    void SetShopWeapons(const std::vector<weapon>& new_shop_weapons);
+    void SetShopClothes(const std::vector<clothes>& new_shop_clothes);
+    void SetShopPotions(const std::vector<potion>& new_shop_potions);
     
     // Геттеры
-    std::array<item, 20> GetShopProducts(const std::array<item, 20>& new_shop_products) const;
-    std::array<weapon, 20> GetShopWeapons(const std::array<weapon, 20>& new_shop_weapons) const;
-    std::array<clothes, 20> GetShopClothes(const std::array<clothes, 20>& new_shop_clothes) const;
-    std::array<potion, 20> GetShopPotions(const std::array<potion, 20>& new_shop_potions) const;
+    std::vector<item> GetShopProducts() const;
+    std::vector<weapon> GetShopWeapons() const;
+    std::vector<clothes> GetShopClothes() const;
+    std::vector<potion> GetShopPotions() const;
+
+    item GetTheShopProduct(const int& idx) const;
+    weapon GetTheShopWeapon(const int& idx) const;
+    clothes GetTheShopClothes(const int& idx) const;
+    potion GetTheShopPotion(const int& idx) const;
 };

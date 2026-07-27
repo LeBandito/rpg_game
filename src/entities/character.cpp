@@ -3,7 +3,7 @@
 #include <iostream>
 
 character::character(): 
-    name("none"), hp(0), max_hp(0), money(0), alive(true), inventory() {}
+    name("none"), hp(10), max_hp(10), money(2), alive(true), inventory() {}
 
 character::character(const std::string& new_name, const int& new_hp, const int& new_max_hp, const int& new_money, 
         const std::array<item, 5>& new_inventory, const int& new_max_weight_inventory, const bool& new_alive): 

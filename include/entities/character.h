@@ -57,6 +57,4 @@ public:
     std::array<item, 5> GetInventory();
     int GetMaxWeightInventory();
     bool GetAlive();
-
-    ~character() {}
 };

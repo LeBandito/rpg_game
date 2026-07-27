@@ -182,8 +182,8 @@ std::vector<item> JsonManager::LoadItems(const std::string& file_name) {
 }
 
 // Читаем из enemies.json
-std::array<enemy, 3> JsonManager::LoadEnemies(const std::string& file_name) {
-    std::array<enemy, 3> game_enemies;
+std::vector<enemy> JsonManager::LoadEnemies(const std::string& file_name) {
+    std::vector<enemy> game_enemies;
     try {
         std::ifstream file(file_name);
         if (!file.is_open()) {
@@ -194,11 +194,8 @@ std::array<enemy, 3> JsonManager::LoadEnemies(const std::string& file_name) {
         file >> j;
         file.close();
 
-        int i(0);
-        for (const json& idx : j) {
-            game_enemies[i] = FromJsonToEnemy(idx);
-            ++i;
-        }
+        for (const json& idx : j)
+            game_enemies.push_back(FromJsonToEnemy(idx));
 
         return game_enemies;
     } catch (const std::exception& e) {
@@ -206,6 +203,56 @@ std::array<enemy, 3> JsonManager::LoadEnemies(const std::string& file_name) {
         return game_enemies;
     }
 }
+
+// Читаем из weapons.json
+std::vector<weapon> JsonManager::LoadWeapons(const std::string& file_name) {
+    std::vector<weapon> game_weapons;
+    try {
+        std::ifstream file(file_name);
+        if (!file.is_open()) {
+            std::cout << "Not open - " << file_name << std::endl;
+            return game_weapons;
+        }
+        json j;
+        file >> j;
+        file.close();
+
+        for (const json& idx : j)
+            game_weapons.push_back(FromJsonToWeapon(idx));
+
+        return game_weapons;
+    } catch (const std::exception& e) {
+        std::cout << "Error:\t" << e.what() << std::endl;
+        return game_weapons;
+    }
+}
+
+// // Читаем из potions.json
+// std::vector<potion> JsonManager::LoadPotions(const std::string& file_name) {
+//     std::vector<potion> game_potions;
+//     try {
+//         std::ifstream file(file_name);
+//         if (!file.is_open()) {
+//             std::cout << "Not open - " << file_name << std::endl;
+//             return game_potions;
+//         }
+//         json j;
+//         file >> j;
+//         file.close();
+
+//         for (const json& idx : j) 
+//             game_potions.push_back();
+
+//     } catch (const std::exception& e) {
+//         std::cout << "Error:\t" << e.what() << std::endl;
+//         return game_potions;
+//     }
+// }
+
+// // Читаем из clothes.json
+// std::vector<clothes> JsonManager::LoadClothes(const std::string& file_name) {
+
+// }
 
 // Сохранение в items.json
 void JsonManager::SaveItems(const std::vector<item>& data, const std::string& file_name) {
@@ -236,7 +283,7 @@ void JsonManager::SavePlayer(player& data, const std::string& file_name) {
 }
 
 // Сохранение в enemies.json
-void JsonManager::SaveEnemies(std::array<enemy, 3>& data, const std::string& file_name) {
+void JsonManager::SaveEnemies(std::vector<enemy>& data, const std::string& file_name) {
     std::ofstream file(file_name);
 
     if (!file.is_open()) {

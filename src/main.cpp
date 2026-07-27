@@ -12,7 +12,7 @@ int main() {
 
     // Великое начало!
     game game_first;
-    game_first.run();
+    game_first.StartGameMenu();
 
     return 0;
 }
