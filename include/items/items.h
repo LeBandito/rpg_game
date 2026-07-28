@@ -16,12 +16,17 @@ public:
     // Максимальный конструктор
     item(const int& new_id, const std::string& new_name, const std::string& new_description, const int& new_price, const int& new_weight);
 
-    // Сеттеры
-    void SetId(const int& new_id);
-    void SetName(const std::string& new_name);
-    void SetDescription(const std::string& new_description);
-    void SetPrice(const int& new_price);
-    void SetWeight(const int& new_weight);
+    // Нужны для переопределения
+    virtual void ShowInfo() const;
+    virtual std::string GetType() const;
+    virtual int Use() const = 0;
+    
+    // Сеттеры *теперь виртуальные!
+    virtual void SetId(const int& new_id);
+    virtual void SetName(const std::string& new_name);
+    virtual void SetDescription(const std::string& new_description);
+    virtual void SetPrice(const int& new_price);
+    virtual void SetWeight(const int& new_weight);
 
     // Геттеры
     int GetId() const;
@@ -29,4 +34,7 @@ public:
     std::string GetDescription() const;
     int GetPrice() const;
     int GetWeight() const;
+
+    // Виртуальный деструктор для умного указателя
+    virtual ~item() = default;
 };

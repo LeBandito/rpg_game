@@ -108,7 +108,7 @@ void game::GetChooseOfContinueMenu(const int& idx) {
         break;
     
     case 2:
-        shopper.GameShopping(bruh);
+        shopper.GameShopping();
         break;
     
     case 3:
@@ -130,7 +130,7 @@ void game::GetChooseOfContinueMenu(const int& idx) {
 void game::SetBruh(const player& new_bruh) { bruh = new_bruh; }
 void game::SetEnemies(const std::vector<enemy>& new_enemies) { enemies = new_enemies; }
 void game::SetIdxEnemies(const int& new_idx_enemies) { idx_enemies = new_idx_enemies; }
-void game::SetShopper(const shop& new_shopper) { shopper = new_shopper; }
+// void game::SetShopper(const shop& new_shopper) { shopper = new_shopper; }
 
 // Геттеры
 player game::GetBruh() const { return bruh; }

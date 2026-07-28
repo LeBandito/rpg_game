@@ -13,7 +13,7 @@ add_executable(RPG_Game
     src/shop/shop.cpp
     src/items/items.cpp
     src/items/weapons.cpp
-    src/items/potion.cpp
+    src/items/potions.cpp
     src/items/clothes.cpp
     src/utils/json_manager.cpp
 )

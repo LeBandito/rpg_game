@@ -4,58 +4,35 @@
 #include "items/weapons.h"
 #include "items/clothes.h"
 #include "items/potions.h"
-#include "entities/player.h"
 #include <vector>
+#include <memory>
 
 class shop {
 protected:
     // В будующем добаваить отдельно одежду, оружие, зелья, амулеты.
-    std::vector<item> shop_products;
-    std::vector<weapon> shop_weapons;
-    std::vector<clothes> shop_clothes;
-    std::vector<potion> shop_potions;
+    std::vector<std::unique_ptr<item>> shop_inventory;
 
 public:
     // Просмотр товаров
-    int ShowProducts();
-    // Просмотр оружия
-    int ShowWeapons();
-    // Просмотр одежды
-    int ShowClothes();
-    // Просмотр зелий
-    int ShowPotions();
+    int ShowShopInventory(const std::string& type);
 
-    // Покупка товаров
-    void BuyProduct(const int& idx, player& bruh);
-    // Покупка оружия
-    void BuyWeapons(const int& idx, player& bruh);
-    // Покупка одежды
-    void BuyClothes(const int& idx, player& bruh);
-    // Покупка зелий
-    void BuyPotions(const int& idx, player& bruh);
+    // Продаем предмет
+    std::unique_ptr<item> SellThing(const int& choose, const std::string& type);
+
+    // Покупаем предмет
+    std::unique_ptr<item> BuyThing(const int& index);
 
     // Добавить возможность покупки товара!
 
     int OptionMenu();
-    void ShopMove(const int& choose, player& bruh);
+    template<typename T> T shop::ShopMove(const std::vector<T>& player_choose);
 
     // Сам магазин
-    void GameShopping(player& bruh);
+    void GameShopping();
 
-    // Сеттеры
-    void SetShopProducts(const std::vector<item>& new_shop_products);
-    void SetShopWeapons(const std::vector<weapon>& new_shop_weapons);
-    void SetShopClothes(const std::vector<clothes>& new_shop_clothes);
-    void SetShopPotions(const std::vector<potion>& new_shop_potions);
+    // Сеттер
+    void SetShopInventory(const std::vector<std::unique_ptr<item>>& new_shop_inventory);
     
     // Геттеры
-    std::vector<item> GetShopProducts() const;
-    std::vector<weapon> GetShopWeapons() const;
-    std::vector<clothes> GetShopClothes() const;
-    std::vector<potion> GetShopPotions() const;
-
-    item GetTheShopProduct(const int& idx) const;
-    weapon GetTheShopWeapon(const int& idx) const;
-    clothes GetTheShopClothes(const int& idx) const;
-    potion GetTheShopPotion(const int& idx) const;
+    std::vector<std::unique_ptr<item>> GetShopInventory() const;
 };

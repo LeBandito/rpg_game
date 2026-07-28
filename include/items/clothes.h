@@ -10,6 +10,10 @@ protected:
     int feet;
 
 public:
+    void ShowInfo() const override;
+    std::string GetType() const override;
+    int Use() const override;
+    
     // Сеттеры
     void GetHead(const int& new_head);
     void SetBody(const int& new_body);

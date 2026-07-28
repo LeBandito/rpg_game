@@ -30,6 +30,15 @@ public:
     // Смена оружия
     void ChangeWeapon();
 
+    // Покупка товаров
+    void BuyProduct(const int& idx);
+    // Покупка оружия
+    void BuyWeapons(const int& idx);
+    // Покупка одежды
+    void BuyClothes(const int& idx);
+    // Покупка зелий
+    void BuyPotions(const int& idx);
+
     // Сеттеры
     void SetPlayerWeaponFirst(const weapon& new_player_weapon_first);
     void SetPlayerWeaponSecond(const weapon& new_player_weapon_first);

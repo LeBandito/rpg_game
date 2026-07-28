@@ -7,15 +7,15 @@
             "shield": 0,
             "money": 5,
             "inventory": [
-                { "name": "knife", "type": "weapon", "effect": "none", "min_effect": 10, "max_effect": 12, "prise": 8, "weight": 3 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 }
+                { "id": 1, "name": "apple", "description": "just red apple...", "prise": 1, "weight": 1 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 }
             ],
             "max_weight_inventory": 1000,
             "alive": true,
-            "enemy_weapon": { "name": "knife", "type": "weapon", "effect": "none", "min_effect": 10, "max_effect": 12, "prise": 8, "weight": 3 }
+            "enemy_weapon": { "id": 2, "name": "knife", "description": "just knife...", "prise": 5, "weight": 2, "min_damage": 5, "max_damage": 8, "effect": "none" }
         },
         {
             "name": "Skeleton",
@@ -24,15 +24,15 @@
             "shield": 0,
             "money": 30,
             "inventory": [
-                { "name": "sword", "type": "weapon", "effect": "none", "min_effect": 20, "max_effect": 35, "prise": 50, "weight": 15 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 }
+                { "id": 1, "name": "apple", "description": "just red apple...", "prise": 1, "weight": 1 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 }
             ],
             "max_weight_inventory": 1000,
             "alive": true,
-            "enemy_weapon": { "name": "sword", "type": "weapon", "effect": "none", "min_effect": 20, "max_effect": 35, "prise": 50, "weight": 15 }
+            "enemy_weapon": { "id": 3, "name": "sword", "description": "just sword...", "prise": 50, "weight": 15, "min_damage": 20, "max_damage": 35, "effect": "none" }
         },
         {
             "name": "Ork",
@@ -41,15 +41,15 @@
             "shield": 0,
             "money": 65,
             "inventory": [
-                { "name": "tree", "type": "weapon", "effect": "none", "min_effect": 60, "max_effect": 85, "prise": 4, "weight": 112 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 },
-                { "name": "none", "type": "none", "effect": "none", "min_effect": 0, "max_effect": 0, "prise": 0, "weight": 0 }
+                { "id": 1, "name": "apple", "description": "just red apple...", "prise": 1, "weight": 1 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 },
+                { "id": 0, "name": "none", "description": "none", "prise": 0, "weight": 0 }
             ],
             "max_weight_inventory": 1000,
             "alive": true,
-            "enemy_weapon": { "name": "tree", "type": "weapon", "effect": "none", "min_effect": 60, "max_effect": 85, "prise": 4, "weight": 112 }
+            "enemy_weapon": { "id": 4, "name": "tree", "description": "tree...", "prise": 4, "weight": 112, "min_damage": 60, "max_damage": 85, "effect": "none" }
         }
     ]
 }

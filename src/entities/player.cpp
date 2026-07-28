@@ -1,5 +1,7 @@
 #include "entities/player.h"
 
+#include "shop/shop.h"
+
 #include <iostream>
 
 // Конструктор по умолчанию
@@ -54,6 +56,66 @@ void player::ChangeWeapon() {
         player_weapon_second = player_weapons[idx];
     } else {
         std::cout << "What?" << std::endl;        
+    }
+}
+
+void player::BuyProduct(const int& idx) {
+    // Блин. -1, т.к показывали на 1 больше
+    if ((GetMoney() > shop_products[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_products[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
+        int idx_inventory(0);
+
+        bruh.ShowInventory();
+
+        std::cout << "Which spot?" << std::endl;
+        std::cin >> idx_inventory;
+        bruh.AddItemToInventory(shop_products[idx - 1], idx_inventory - 1);
+    } else {
+        std::cout << "Not much money!" << std::endl;
+    }
+}
+
+void player::BuyWeapons(const int& idx) {
+    // Блин. -1, т.к показывали на 1 больше
+    if ((bruh.GetMoney() > shop_weapons[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_weapons[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
+        int idx_inventory(0);
+
+        bruh.ShowInventory();
+
+        std::cout << "Which spot?" << std::endl;
+        std::cin >> idx_inventory;
+        bruh.AddItemToInventory(shop_weapons[idx - 1], idx_inventory - 1);
+    } else {
+        std::cout << "Not much money!" << std::endl;
+    }
+}
+
+void player::BuyClothes(const int& idx) {
+    // Блин. -1, т.к показывали на 1 больше
+    if ((bruh.GetMoney() > shop_clothes[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_clothes[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
+        int idx_inventory(0);
+
+        bruh.ShowInventory();
+
+        std::cout << "Which spot?" << std::endl;
+        std::cin >> idx_inventory;
+        bruh.AddItemToInventory(shop_clothes[idx - 1], idx_inventory - 1);
+    } else {
+        std::cout << "Not much money!" << std::endl;
+    }
+}
+
+void player::BuyPotions(const int& idx) {
+    // Блин. -1, т.к показывали на 1 больше
+    if ((bruh.GetMoney() > shop_potions[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_potions[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
+        int idx_inventory(0);
+
+        bruh.ShowInventory();
+
+        std::cout << "Which spot?" << std::endl;
+        std::cin >> idx_inventory;
+        bruh.AddItemToInventory(shop_potions[idx - 1], idx_inventory - 1);
+    } else {
+        std::cout << "Not much money!" << std::endl;
     }
 }
 
