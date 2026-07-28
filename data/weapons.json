@@ -1,11 +1,11 @@
 {
-    "items": [
-        { "name": "knife", "type": "weapon", "effect": "none", "min_effect": 10, "max_effect": 12, "prise": 8, "weight": 3 },
-        { "name": "sword", "type": "weapon", "effect": "none", "min_effect": 20, "max_effect": 35, "prise": 50, "weight": 15 },
-        { "name": "tree", "type": "weapon", "effect": "none", "min_effect": 60, "max_effect": 85, "prise": 4, "weight": 112 },
-        { "name": "silver_knife", "type": "weapon", "effect": "none", "min_effect": 15, "max_effect": 28, "prise": 35, "weight": 4 },
-        { "name": "gold_sword", "type": "weapon", "effect": "none", "min_effect": 40, "max_effect": 60, "prise": 200, "weight": 20 },
-        { "name": "god_gun", "type": "weapon", "effect": "none", "min_effect": 1000, "max_effect": 1000, "prise": 100000, "weight": 0 },
-        { "name": "stick", "type": "weapon", "effect": "none", "min_effect": 5, "max_effect": 10, "prise": 2, "weight": 5 }
+    "weapons": [
+        { "id": 2, "name": "knife", "description": "just knife...", "prise": 5, "weight": 2, "min_damage": 5, "max_damage": 8, "effect": "none" },
+        { "id": 3, "name": "sword", "description": "just knife...", "prise": 5, "weight": 2, "min_damage": 5, "max_damage": 8, "effect": "none" },
+        { "id": 4, "name": "tree", "description": "just knife...", "prise": 5, "weight": 2, "min_damage": 5, "max_damage": 8, "effect": "none" },
+        { "id": 5, "name": "silver_knife", "description": "just knife...", "prise": 5, "weight": 2, "min_damage": 5, "max_damage": 8, "effect": "none" },
+        { "id": 6, "name": "gold_sword", "description": "just knife...", "prise": 5, "weight": 2, "min_damage": 5, "max_damage": 8, "effect": "none" },
+        { "id": 7, "name": "god_gun", "description": "just knife...", "prise": 5, "weight": 2, "min_damage": 5, "max_damage": 8, "effect": "none" },
+        { "id": 8, "name": "stick", "description": "just knife...", "prise": 2, "weight": 5, "min_damage": 5, "max_damage": 10, "effect": "none" }
     ]
 }

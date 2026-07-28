@@ -25,19 +25,30 @@ public:
     // Просмотр зелий
     int ShowPotions();
 
-    // Покупка товаров
-    void BuyProduct(const int& idx, player& bruh);
-    // Покупка оружия
-    void BuyWeapons(const int& idx, player& bruh);
-    // Покупка одежды
-    void BuyClothes(const int& idx, player& bruh);
-    // Покупка зелий
-    void BuyPotions(const int& idx, player& bruh);
+    // Продажа товаров
+    item SellProduct(const int& index, player& bruh);
+    // Продажа оружия
+    weapon SellWeapons(const int& index, player& bruh);
+    // Продажа одежды
+    clothes SellClothes(const int& index, player& bruh);
+    // Продажа зелий
+    potion SellPotions(const int& index, player& bruh);
 
-    // Добавить возможность покупки товара!
+    // Покупка товаров
+    void BuyProduct(player& bruh);
+    // Покупка оружия
+    void BuyWeapons(player& bruh);
+    // Покупка одежды
+    void BuyClothes(player& bruh);
+    // Покупка зелий
+    void BuyPotions(player& bruh);
+
+    // Меню продажи игрока
+    int PlayerSellingMenu();
+    int PlayerSellingInventory(player& bruh);
 
     int OptionMenu();
-    void ShopMove(const int& choose, player& bruh);
+    void ShopMove(const int& choose);
 
     // Сам магазин
     void GameShopping(player& bruh);
@@ -54,8 +65,8 @@ public:
     std::vector<clothes> GetShopClothes() const;
     std::vector<potion> GetShopPotions() const;
 
-    item GetTheShopProduct(const int& idx) const;
-    weapon GetTheShopWeapon(const int& idx) const;
-    clothes GetTheShopClothes(const int& idx) const;
-    potion GetTheShopPotion(const int& idx) const;
+    item GetTheShopProduct(const int& index) const;
+    weapon GetTheShopWeapon(const int& index) const;
+    clothes GetTheShopClothes(const int& index) const;
+    potion GetTheShopPotion(const int& index) const;
 };

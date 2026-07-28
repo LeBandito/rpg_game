@@ -1,7 +1,12 @@
 #include "entities/enemy.h"
 
-int enemy::ToGiveMoney() {
-    return money;
+int enemy::ToGiveMoney() { return money; }
+
+// Отдать оружие
+weapon enemy::ToGiveWeapon() {
+    weapon temporary = enemy_weapon;
+    enemy_weapon = weapon();
+    return temporary;
 }
 
 // Сеттер

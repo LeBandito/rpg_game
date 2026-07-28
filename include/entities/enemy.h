@@ -11,6 +11,9 @@ public:
     // Отдать деньги после победы
     int ToGiveMoney();
 
+    // Отдать оружие
+    weapon ToGiveWeapon();
+
     // Сеттер
     void SetWeapon(const weapon& new_enemy_weapon);
 

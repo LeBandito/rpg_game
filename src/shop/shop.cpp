@@ -3,122 +3,201 @@
 
 // Просмотр товаров
 int shop::ShowProducts() {
-    int idx(0);
+    int index(0);
     std::cout << "The products:" << std::endl;
     for (int i = 0; i < shop_products.size(); ++i) {
-        std::cout << i + 1 << ") " << shop_products[i].GetName() << std::endl;
-        std::cout << shop_products[i].GetDescription() << std::endl;
-        std::cout << shop_products[i].GetPrice() << "\t" << shop_products[i].GetWeight() << std::endl;
+        std::cout << i + 1 << std::endl;
+        shop_products[i].ShowInfo();
     }
-    std::cin >> idx;
-    return idx;
+    std::cin >> index;
+    return index - 1;
 }
 
 // Просмотр оружия
 int shop::ShowWeapons() {
-    int idx(0);
+    int index(0);
     std::cout << "The weapons:" << std::endl;
     for (int i = 0; i < shop_weapons.size(); ++i) {
-        std::cout << i + 1 << ") " << shop_weapons[i].GetName() << std::endl;
-        std::cout << shop_weapons[i].GetDescription() << std::endl;
-        std::cout << shop_products[i].GetPrice() << "\t" << shop_products[i].GetWeight() << std::endl;
-        std::cout << "(" << shop_weapons[i].GetMinDamage() << ", " << shop_weapons[i].GetMaxDamage() << ") |\t" << shop_weapons[i].GetEffect() << std::endl;
+        std::cout << i + 1 << std::endl;
+        shop_weapons[i].ShowInfo();
     }
-    std::cin >> idx;
-    return idx;
+    std::cin >> index;
+    return index;
 }
 
 // Просмотр одежды
 int shop::ShowClothes() {
-    int idx(0);
+    int index(0);
     std::cout << "The clothes:" << std::endl;
     for (int i = 0; i < shop_clothes.size(); ++i) {
-        std::cout << i + 1 << ") " << shop_clothes[i].GetName() << std::endl;
-        std::cout << shop_clothes[i].GetDescription() << std::endl;
-        std::cout << shop_products[i].GetPrice() << "\t" << shop_products[i].GetWeight() << std::endl;
-        std::cout << "(" << shop_clothes[i].GetHead() << ", " << shop_clothes[i].GetBody() << ", " << shop_clothes[i].GetHands() << ", " << 
-        shop_clothes[i].GetLegs() << ", " << shop_clothes[i].GetFeet() << ")" << std::endl;
+        std::cout << i + 1 << std::endl;
+        shop_clothes[i].ShowInfo();
     }
-    std::cin >> idx;
-    return idx;
+    std::cin >> index;
+    return index;
 }
 
 // Просмотр зелий
 int shop::ShowPotions() {
-    int idx(0);
+    int index(0);
     std::cout << "The potions:" << std::endl;
     for (int i = 0; i < shop_potions.size(); ++i) {
-        std::cout << i + 1 << ") " << shop_potions[i].GetName() << std::endl;
-        std::cout << shop_potions[i].GetDescription() << std::endl;
-        std::cout << shop_potions[i].GetPrice() << ", " << shop_potions[i].GetWeight() << std::endl;
-        std::cout << shop_potions[i].GetPermanentDamage() << ", " << shop_potions[i].GetTime() << std::endl;
+        std::cout << i + 1 << std::endl;
+        shop_potions[i].ShowInfo();
     }
-    std::cin >> idx;
-    return idx;
+    std::cin >> index;
+    return index;
 }
 
-void shop::BuyProduct(const int& idx, player& bruh) {
+item shop::SellProduct(const int& index, player& bruh) {
     // Блин. -1, т.к показывали на 1 больше
-    if ((bruh.GetMoney() > shop_products[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_products[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
-        int idx_inventory(0);
+    if ((bruh.GetMoney() > shop_products[index - 1].GetPrice()) && (bruh.GetBag().GetWeightInventory() + shop_products[index - 1].GetWeight()) <= bruh.GetBag().GetWeightInventory()) {
+        int index_inventory(0);
+        bruh.GetBag().ShowInventoryItems();
+        std::cout << "Number\t";
+        std::cin >> index_inventory;
 
-        bruh.ShowInventory();
+        // Добавлен
+        bruh.AddItemToTheBag(shop_products[index - 1], index_inventory - 1);
 
-        std::cout << "Which spot?" << std::endl;
-        std::cin >> idx_inventory;
-        bruh.AddItemToInventory(shop_products[idx - 1], idx_inventory - 1);
+        // Деньги потратил
+        bruh.GiveMoney(shop_products[index - 1].GetPrice());
     } else {
-        std::cout << "Not much money!" << std::endl;
-    }
-}
-
-void shop::BuyWeapons(const int& idx, player& bruh) {
-    // Блин. -1, т.к показывали на 1 больше
-    if ((bruh.GetMoney() > shop_weapons[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_weapons[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
-        int idx_inventory(0);
-
-        bruh.ShowInventory();
-
-        std::cout << "Which spot?" << std::endl;
-        std::cin >> idx_inventory;
-        bruh.AddItemToInventory(shop_weapons[idx - 1], idx_inventory - 1);
-    } else {
-        std::cout << "Not much money!" << std::endl;
+        std::cout << "Not much money or too mauch weight!" << std::endl;
     }
 }
 
-void shop::BuyClothes(const int& idx, player& bruh) {
+weapon shop::SellWeapons(const int& index, player& bruh) {
     // Блин. -1, т.к показывали на 1 больше
-    if ((bruh.GetMoney() > shop_clothes[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_clothes[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
-        int idx_inventory(0);
+    if ((bruh.GetMoney() > shop_weapons[index - 1].GetPrice()) && (bruh.GetBag().GetWeightInventory() + shop_weapons[index - 1].GetWeight()) <= bruh.GetBag().GetWeightInventory()) {
+        int index_inventory(0);
+        bruh.GetBag().ShowInventoryWeapons();
+        std::cout << "Number\t";
+        std::cin >> index_inventory;
 
-        bruh.ShowInventory();
+        // Добавлен
+        bruh.AddWeaponsToTheBag(shop_weapons[index - 1], index_inventory - 1);
 
-        std::cout << "Which spot?" << std::endl;
-        std::cin >> idx_inventory;
-        bruh.AddItemToInventory(shop_clothes[idx - 1], idx_inventory - 1);
+        // Деньги потратил
+        bruh.GiveMoney(shop_weapons[index - 1].GetPrice());
     } else {
-        std::cout << "Not much money!" << std::endl;
+        std::cout << "Not much money or too mauch weight!" << std::endl;
     }
 }
 
-void shop::BuyPotions(const int& idx, player& bruh) {
+clothes shop::SellClothes(const int& index, player& bruh) {
     // Блин. -1, т.к показывали на 1 больше
-    if ((bruh.GetMoney() > shop_potions[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_potions[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
-        int idx_inventory(0);
+    if ((bruh.GetMoney() > shop_clothes[index - 1].GetPrice()) && (bruh.GetBag().GetWeightInventory() + shop_clothes[index - 1].GetWeight()) <= bruh.GetBag().GetWeightInventory()) {
+        int index_inventory(0);
+        bruh.GetBag().ShowInventoryClothes();
+        std::cout << "Number\t";
+        std::cin >> index_inventory;
 
-        bruh.ShowInventory();
+        // Добавлен
+        bruh.AddClothesToTheBag(shop_clothes[index - 1], index_inventory - 1);
 
-        std::cout << "Which spot?" << std::endl;
-        std::cin >> idx_inventory;
-        bruh.AddItemToInventory(shop_potions[idx - 1], idx_inventory - 1);
+        // Деньги потратил
+        bruh.GiveMoney(shop_clothes[index - 1].GetPrice());
     } else {
-        std::cout << "Not much money!" << std::endl;
+        std::cout << "Not much money or too mauch weight!" << std::endl;
+    }
+}
+
+potion shop::SellPotions(const int& index, player& bruh) {
+    // Блин. -1, т.к показывали на 1 больше
+    if ((bruh.GetMoney() > shop_potions[index - 1].GetPrice()) && (bruh.GetBag().GetWeightInventory() + shop_potions[index - 1].GetWeight()) <= bruh.GetBag().GetWeightInventory()) {
+        int index_inventory(0);
+        bruh.GetBag().ShowInventoryPotions();
+        std::cout << "Number\t";
+        std::cin >> index_inventory;
+
+        // Добавлен
+        bruh.AddPotionsToTheBag(shop_potions[index - 1], index_inventory - 1);
+
+        // Деньги потратил
+        bruh.GiveMoney(shop_potions[index - 1].GetPrice());
+    } else {
+        std::cout << "Not much money or too mauch weight!" << std::endl;
+    }
+}
+
+// Покупка товаров
+void shop::BuyProduct(player& bruh) {
+    // Ахахахахх РЫНОЧЕК ПОРЕШАЛ АХАХАХАХХ
+    bruh.ReceiveMoney((bruh.SellPlayerProduct().GetPrice() * 7) / 10);
+    shop_products.push_back(bruh.SellPlayerProduct());
+}
+
+// Покупка оружия
+void shop::BuyWeapons(player& bruh) {
+    // Ахахахахх РЫНОЧЕК ПОРЕШАЛ АХАХАХАХХ
+    bruh.ReceiveMoney((bruh.SellPlayerWeapon().GetPrice() * 7) / 10);
+    shop_products.push_back(bruh.SellPlayerWeapon());
+}
+
+// Покупка одежды
+void shop::BuyClothes(player& bruh) {
+    // Ахахахахх РЫНОЧЕК ПОРЕШАЛ АХАХАХАХХ
+    bruh.ReceiveMoney((bruh.SellPlayerClothes().GetPrice() * 7) / 10);
+    shop_products.push_back(bruh.SellPlayerClothes());
+}
+
+// Покупка зелий
+void shop::BuyPotions(player& bruh) {
+    // Ахахахахх РЫНОЧЕК ПОРЕШАЛ АХАХАХАХХ
+    bruh.ReceiveMoney((bruh.SellPlayerPotion().GetPrice() * 7) / 10);
+    shop_products.push_back(bruh.SellPlayerPotion());
+}
+
+// Меню продажи игрока
+int shop::PlayerSellingMenu() {
+    int index;
+
+    std::cout << "What sell?" << std::endl;
+    std::cout << "1) Products." << std::endl;
+    std::cout << "2) Weapons." << std::endl;
+    std::cout << "3) Clothes." << std::endl;
+    std::cout << "4) Potions." << std::endl;
+    std::cout << "5) leave!" << std::endl;
+
+    std::cin >> index;
+    return index;   
+}
+
+int shop::PlayerSellingInventory(player& bruh) {
+    int choose(0);
+    while (choose != 5) {
+        choose = PlayerSellingMenu();
+        switch (choose)
+        {
+        case 1:
+            BuyProduct(bruh);
+            break;
+
+        case 2:
+            BuyWeapons(bruh);
+            break;
+        
+        case 3:
+            BuyClothes(bruh);
+            break;
+
+        case 4:
+            BuyPotions(bruh);
+            break;
+
+        case 5:
+            std::cout << "Back!" << std::endl;
+            break;
+
+        default:
+            break;
+        }
     }
 }
 
 int shop::OptionMenu() {
-    int idx;
+    int index;
 
     std::cout << "Welocome to the my store!" << std::endl;
     std::cout << "What do you want?" << std::endl;
@@ -126,37 +205,47 @@ int shop::OptionMenu() {
     std::cout << "2) Weapons." << std::endl;
     std::cout << "3) Clothes." << std::endl;
     std::cout << "4) Potions." << std::endl;
+    std::cout << "5) Sell." << std::endl;
+    std::cout << "6) leave." << std::endl;
 
-    std::cin >> idx;
-    return idx;     
-}
-
-void shop::ShopMove(const int& choose, player& bruh) {
-    switch (choose)
-    {
-    case 1:
-        BuyProduct(ShowProducts(), bruh);
-        break;
-
-    case 2:
-        BuyWeapons(ShowWeapons(), bruh);
-        break;
-    
-    case 3:
-        BuyClothes(ShowClothes(), bruh);
-        break;
-
-    case 4:
-        BuyPotions(ShowPotions(), bruh);
-        break;
-
-    default:
-        break;
-    }
+    std::cin >> index;
+    return index;     
 }
 
 void shop::GameShopping(player& bruh) {
-    ShopMove(OptionMenu(), bruh);
+    int choose(0);
+    while (choose != 5) {
+        choose = OptionMenu();
+        switch (choose)
+        {
+        case 1:
+            SellProduct(ShowProducts(), bruh);
+            break;
+
+        case 2:
+            SellWeapons(ShowWeapons(), bruh);
+            break;
+        
+        case 3:
+            SellClothes(ShowClothes(), bruh);
+            break;
+
+        case 4:
+            SellPotions(ShowPotions(), bruh);
+            break;
+
+        case 5:
+            PlayerSellingInventory(bruh);
+            break;
+
+        case 6:
+            std::cout << "Bye!" << std::endl;
+            break;
+
+        default:
+            break;
+        }
+    }
 }
 
 // Сеттеры
@@ -171,7 +260,7 @@ std::vector<weapon> shop::GetShopWeapons() const { return shop_weapons; }
 std::vector<clothes> shop::GetShopClothes() const { return shop_clothes; }
 std::vector<potion> shop::GetShopPotions() const { return shop_potions; }
 
-item shop::GetTheShopProduct(const int& idx) const { return shop_products[idx]; }
-weapon shop::GetTheShopWeapon(const int& idx) const { return shop_weapons[idx]; }
-clothes shop::GetTheShopClothes(const int& idx) const { return shop_clothes[idx]; }
-potion shop::GetTheShopPotion(const int& idx) const { return shop_potions[idx]; }
+item shop::GetTheShopProduct(const int& index) const { return shop_products[index]; }
+weapon shop::GetTheShopWeapon(const int& index) const { return shop_weapons[index]; }
+clothes shop::GetTheShopClothes(const int& index) const { return shop_clothes[index]; }
+potion shop::GetTheShopPotion(const int& index) const { return shop_potions[index]; }

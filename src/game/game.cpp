@@ -19,6 +19,25 @@ void game::CreatePlayer() {
 
     temporary.SetName(new_name);
     temporary.SetMoney(20);
+    temporary.SetHp(20);
+    temporary.SetMaxHp(25);
+    temporary.SetMoney(10);
+    temporary.SetBag(
+        {
+            0, 0, 0, 0, 
+            10, 0, 
+            3, 3, 2, 2, 
+            {
+                1, "apple", "just red apple...", 1
+            }, {
+                2, "knife", "just knife...", 5, 2, 5, 8, "none"
+            }, {
+
+            }, {
+
+            }
+        }
+    );
 
     bruh = temporary;
 }

@@ -25,7 +25,8 @@ void weapon::ShowInfo() const {
 std::string weapon::GetType() const { return "weapon"; }
 
 int weapon::Use() const {
-    std::srand(time(NULL));
+    // Случайное значение из диапазона 
+    std::srand(std::time(NULL));
     return min_damage + std::rand() % (max_damage - min_damage + 1);
 }
 

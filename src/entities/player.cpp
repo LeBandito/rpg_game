@@ -5,33 +5,59 @@
 #include <iostream>
 
 // Конструктор по умолчанию
-player::player() : character(), player_weapon_first(weapon()), player_weapon_second(weapon()), weight_inventory(0) {
-    for (int i = 0; i < player_weapons.size(); ++i)
-        player_weapons[i] = weapon();
-}
+player::player() : character(), player_weapon_first(weapon()), player_weapon_second(weapon()) {}
 
 // Конструктор с параметрами
-player::player(const std::string& new_name, const int& new_hp, const int& new_max_hp, const int& new_money, const std::array<item, 5>& new_inventory, 
-    const int& new_max_weight_inventory, const bool& new_alive, const weapon& new_player_weapon_first, const weapon& new_player_weapon_second, 
-    const std::array<weapon, 2>& new_player_weapons, const int& new_weight_inventory) : 
-    character(new_name, new_hp, new_max_hp, new_money, new_inventory, new_max_weight_inventory, new_alive), player_weapon_first(new_player_weapon_first), 
-    player_weapon_second(new_player_weapon_second), player_weapons(new_player_weapons), weight_inventory(new_weight_inventory) {} 
+player::player(const int& new_id, const std::string& new_name, const bool& new_alive, const int& new_hp, 
+    const int& new_max_hp, const int& new_money, const inventory& new_bag, const weapon& new_player_weapon_first, const weapon& new_player_weapon_second) : 
+    character(new_id, new_name, new_alive, new_hp, new_max_hp, new_money, new_bag), 
+    player_weapon_first(new_player_weapon_first), player_weapon_second(new_player_weapon_second) {} 
 
 
-void player::PlusMoney(const int& plus_money) {
-    money += plus_money;
+void player::ReceiveMoney(const int& cash) {
+    money += cash;
 }
 
-void player::SpendMoney(const int& minus_money) {
-    money -= money;
+int player::GiveMoney(const int& minus_money) {
+    money -= minus_money;
+    return minus_money;
 }
 
-void player::AddItemToInventory(const item& temporary, const int& position) {
-    if (weight_inventory + temporary.GetWeight() > max_weight_inventory) {
+void player::AddItemToTheBag(const item& temporary, const int& index) {
+    if (bag.GetWeightInventory() + temporary.GetWeight() > bag.GetMaxWeightInventory()) {
         std::cout << "Too much weight..." << std::endl;
-    } else if (inventory[position].GetName() == "none") {
-        inventory[position] = temporary;
-        weight_inventory += temporary.GetWeight();
+    } else if (bag.GetInventoryItems(index).GetName() == "none") {
+        bag.ReceiveInventoryItems(index, temporary);
+    } else {
+        std::cout << "The bag is full!" << std::endl;
+    }
+}
+
+void player::AddWeaponsToTheBag(const weapon& temporary, const int& index) {
+    if (bag.GetWeightInventory() + temporary.GetWeight() > bag.GetMaxWeightInventory()) {
+        std::cout << "Too much weight..." << std::endl;
+    } else if (bag.GetInventoryWeapons(index).GetName() == "none") {
+        bag.ReceiveInventoryItems(index, temporary);
+    } else {
+        std::cout << "The bag is full!" << std::endl;
+    }
+}
+
+void player::AddClothesToTheBag(const clothes& temporary, const int& index) {
+    if (bag.GetWeightInventory() + temporary.GetWeight() > bag.GetMaxWeightInventory()) {
+        std::cout << "Too much weight..." << std::endl;
+    } else if (bag.GetInventoryClothes(index).GetName() == "none") {
+        bag.ReceiveInventoryItems(index, temporary);
+    } else {
+        std::cout << "The bag is full!" << std::endl;
+    }
+}
+
+void player::AddPotionsToTheBag(const potion& temporary, const int& index) {
+    if (bag.GetWeightInventory() + temporary.GetWeight() > bag.GetMaxWeightInventory()) {
+        std::cout << "Too much weight..." << std::endl;
+    } else if (bag.GetInventoryPotions(index).GetName() == "none") {
+        bag.ReceiveInventoryItems(index, temporary);
     } else {
         std::cout << "The bag is full!" << std::endl;
     }
@@ -45,88 +71,24 @@ void player::ChangeWeapon() {
     std::cin >> player_weapon_id;
 
     std::cout << "Choose new weapon:" << std::endl;
-    int idx(0);
-    for (int i = 0; i < player_weapons.size(); ++i) 
-        std::cout << i + 1 << ") " << player_weapons[i].GetName() << " | (" << player_weapons[i].GetMinDamage() << ", " << player_weapons[i].GetMaxDamage() << ")" << std::endl;
-    std::cin >> idx;
+    int index(0);
+    bag.ShowInventoryWeapons();
+    std::cout << "Number:\t";
+    std::cin >> index;
 
     if (player_weapon_id == 1) {
-        player_weapon_first = player_weapons[idx];
+        player_weapon_first = bag.GiveInventoryWeapons(index - 1);
     } else if (player_weapon_id == 2) {
-        player_weapon_second = player_weapons[idx];
+        player_weapon_second = bag.GiveInventoryWeapons(index - 1);
     } else {
         std::cout << "What?" << std::endl;        
-    }
-}
-
-void player::BuyProduct(const int& idx) {
-    // Блин. -1, т.к показывали на 1 больше
-    if ((GetMoney() > shop_products[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_products[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
-        int idx_inventory(0);
-
-        bruh.ShowInventory();
-
-        std::cout << "Which spot?" << std::endl;
-        std::cin >> idx_inventory;
-        bruh.AddItemToInventory(shop_products[idx - 1], idx_inventory - 1);
-    } else {
-        std::cout << "Not much money!" << std::endl;
-    }
-}
-
-void player::BuyWeapons(const int& idx) {
-    // Блин. -1, т.к показывали на 1 больше
-    if ((bruh.GetMoney() > shop_weapons[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_weapons[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
-        int idx_inventory(0);
-
-        bruh.ShowInventory();
-
-        std::cout << "Which spot?" << std::endl;
-        std::cin >> idx_inventory;
-        bruh.AddItemToInventory(shop_weapons[idx - 1], idx_inventory - 1);
-    } else {
-        std::cout << "Not much money!" << std::endl;
-    }
-}
-
-void player::BuyClothes(const int& idx) {
-    // Блин. -1, т.к показывали на 1 больше
-    if ((bruh.GetMoney() > shop_clothes[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_clothes[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
-        int idx_inventory(0);
-
-        bruh.ShowInventory();
-
-        std::cout << "Which spot?" << std::endl;
-        std::cin >> idx_inventory;
-        bruh.AddItemToInventory(shop_clothes[idx - 1], idx_inventory - 1);
-    } else {
-        std::cout << "Not much money!" << std::endl;
-    }
-}
-
-void player::BuyPotions(const int& idx) {
-    // Блин. -1, т.к показывали на 1 больше
-    if ((bruh.GetMoney() > shop_potions[idx - 1].GetPrice()) || (bruh.GetWeightInventory() + shop_potions[idx - 1].GetWeight()) < bruh.GetMaxWeightInventory()) {
-        int idx_inventory(0);
-
-        bruh.ShowInventory();
-
-        std::cout << "Which spot?" << std::endl;
-        std::cin >> idx_inventory;
-        bruh.AddItemToInventory(shop_potions[idx - 1], idx_inventory - 1);
-    } else {
-        std::cout << "Not much money!" << std::endl;
     }
 }
 
 // Сеттеры
 void player::SetPlayerWeaponFirst(const weapon& new_player_weapon_first) { player_weapon_first = new_player_weapon_first; }
 void player::SetPlayerWeaponSecond(const weapon& new_player_weapon_second) { player_weapon_second = new_player_weapon_second; }
-void player::SetPlayerWeapons(const std::array<weapon, 2>& new_player_weapons) { player_weapons = new_player_weapons; }
-void player::SetWeightInventory(const int& new_weight_inventory) { weight_inventory = new_weight_inventory; }
 
 // Геттеры
 weapon player::GetPlayerWeaponFirst() const { return player_weapon_first; }
 weapon player::GetPlayerWeaponSecond() const { return player_weapon_second; }
-std::array<weapon, 2> player::GetPlayerWeapons() const { return player_weapons; }
-int player::GetWeightInventory() const { return weight_inventory; }

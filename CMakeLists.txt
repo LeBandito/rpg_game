@@ -16,6 +16,7 @@ add_executable(RPG_Game
     src/items/potions.cpp
     src/items/clothes.cpp
     src/utils/json_manager.cpp
+    src/inventory/inventory.cpp
 )
 
 # Для удобного поиска заголовочных файлов

@@ -1,28 +1,29 @@
 #pragma once
 
+#include "inventory/inventory.h"
 #include "items/items.h"
 #include <string>
-#include <array>
+#include <vector>
 
 class character {
 protected:
+    int id; 
     std::string name;
+    bool alive;
     int hp;
     int max_hp;
     int money;
-    std::array<item, 5> inventory;
-    int max_weight_inventory;
-    bool alive;
+    inventory bag;
 
 public:
     // Минимальный конструктор
     character();
 
     // Полный конструктор
-    character(const std::string& new_name, const int& new_hp, const int& new_max_hp, const int& new_money, 
-        const std::array<item, 5>& new_inventory, const int& new_max_weight_inventory, const bool& new_alive);
+    character(const int& new_id, const std::string& new_name, const bool& new_alive, const int& new_hp, const int& new_max_hp, const int& new_money, 
+        const inventory& new_bag);
 
-    // Урон
+    // Получение урона
     void damage(const int& bruh);
 
     // Лечение
@@ -37,24 +38,30 @@ public:
     // Просмотр инвентаря
     void ShowInventory();
 
+    // Продажа товаров
+    item SellPlayerProduct();
+    // Продажа оружия
+    weapon SellPlayerWeapon();
+    // Продажа одежды
+    clothes SellPlayerClothes();
+    // Продажа зелий
+    potion SellPlayerPotion();
+
     // Сеттеры
+    void SetId(const int& new_id);
     void SetName(const std::string& new_name);
+    void SetAlive(const bool& new_alive);
     void SetHp(const int& new_hp);
     void SetMaxHp(const int& new_max_hp);
-    void SetShield(const int& new_shield);
     void SetMoney(const int& new_money);
-    void SetInventory(const std::array<item, 5>& new_inventory);
-    void SetMaxWeightInventory(const int& new_max_weight_inventory);
-    void SetAlive(const bool& new_alive);
+    void SetBag(const inventory& new_bag);
 
     // Геттеры
+    int GetId();
     std::string GetName();
+    bool GetAlive();
     int GetHp();
     int GetMaxHp();
-    int GetShield();
-    // Тот самый геттер для shop.h!
     int GetMoney();
-    std::array<item, 5> GetInventory();
-    int GetMaxWeightInventory();
-    bool GetAlive();
+    inventory GetBag();
 };

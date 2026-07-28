@@ -10,10 +10,11 @@ protected:
     enemy& eminem;
     int round;
     bool turn_side;
+    bool stop;
 
 public:
     // Конструктор
-    battle(player& new_bruh, enemy& new_eminem, const int& round, const bool& turn_side);
+    battle(player& new_bruh, enemy& new_eminem, const int& new_round, const bool& new_turn_side, const bool& new_stop);
 
     // Виды атак Игрока
     int FirstPlayerAttack();

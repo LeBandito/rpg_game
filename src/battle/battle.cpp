@@ -4,28 +4,15 @@
 #include <ctime>
 
 // Конструктор
-battle::battle(player& new_bruh, enemy& new_eminem, const int& round, const bool& turn_side) :
-    bruh(new_bruh), eminem(new_eminem), round(round), turn_side(turn_side) {}
+battle::battle(player& new_bruh, enemy& new_eminem, const int& new_round, const bool& new_turn_side, const bool& new_stop) :
+    bruh(new_bruh), eminem(new_eminem), round(round), turn_side(turn_side), stop(new_stop) {}
 
 // Виды атак Игрока
-int battle::FirstPlayerAttack() {
-    std::srand(time(NULL));
-    // Случайное значение из диапазона 
-    return bruh.GetPlayerWeaponFirst().GetMinDamage() + std::rand() % (bruh.GetPlayerWeaponFirst().GetMaxDamage() - bruh.GetPlayerWeaponFirst().GetMinDamage() + 1);
-}
-
-int battle::SecondPlayerAttack() {
-    std::srand(time(NULL));
-    // Случайное значение из диапазона 
-    return bruh.GetPlayerWeaponSecond().GetMinDamage() + std::rand() % (bruh.GetPlayerWeaponSecond().GetMaxDamage() - bruh.GetPlayerWeaponSecond().GetMinDamage() + 1);
-}
+int battle::FirstPlayerAttack() { return bruh.GetPlayerWeaponFirst().Use(); }
+int battle::SecondPlayerAttack() { return bruh.GetPlayerWeaponSecond().Use(); }
 
 // Виды атак врага
-int battle::FirstEnemyAttack() {
-    std::srand(time(NULL));
-    // Случайное значение из диапазона 
-    return eminem.GetWeapon().GetMinDamage() + std::rand() % (eminem.GetWeapon().GetMaxDamage() - eminem.GetWeapon().GetMinDamage() + 1);
-}
+int battle::FirstEnemyAttack() { return eminem.GetWeapon().Use(); }
 
 // Меню хода
 void battle::OptionsMenuFight() {
@@ -34,6 +21,7 @@ void battle::OptionsMenuFight() {
     bruh.GetPlayerWeaponFirst().GetMinDamage() << ", " << bruh.GetPlayerWeaponFirst().GetMaxDamage() << ");"<< std::endl;
     std::cout << "2) " << bruh.GetPlayerWeaponSecond().GetName() << " | (" << 
     bruh.GetPlayerWeaponSecond().GetMinDamage() << ", " << bruh.GetPlayerWeaponSecond().GetMaxDamage() << ");"<< std::endl;
+    std::cout << "3) Escape! Chance - 10%" << std::endl;
 }
 
 // Варианты ходов
@@ -48,6 +36,7 @@ int battle::GetPlayerChoice() {
 
 // Ход игрока
 void battle::PlayerMove(const int& choice) {
+    std::srand(std::time(NULL));
     switch (choice)
     {
     case 1:
@@ -60,8 +49,17 @@ void battle::PlayerMove(const int& choice) {
         turn_side = false;
         break;
     
+    case 3:
+        if ((std::rand() % 100) > 10) {
+            std::cout << "The escape was a success!" << std::endl;
+            stop = true;
+        } else {
+            bruh.damage(FirstEnemyAttack() * 2); 
+            turn_side = false;
+        }
+        break;
+    
     default:
-        turn_side = false;
         break;
     }
 }
@@ -83,7 +81,7 @@ void battle::ShowBattleStatistic() {
 void battle::Fight() {
     std::cout << "Start FIGHT!!!" << std::endl;
     ShowBattleStatistic();
-    while ((bruh.GetHp() > 0) || (eminem.GetHp() > 0)) {
+    while ((bruh.GetHp() > 0) || (eminem.GetHp() > 0) || stop) {
         std::cout << "ROUND " << round << " FIGHT!!!" << std::endl;
         if (turn_side) {
             PlayerMove(GetPlayerChoice());
@@ -96,8 +94,16 @@ void battle::Fight() {
     if (bruh.GetHp() > 0) {
         std::cout << "You WIN!" << std::endl;
         std::cout << "You're reward:\t" << eminem.ToGiveMoney() << std::endl;
-        bruh.PlusMoney(eminem.ToGiveMoney());
+        bruh.ReceiveMoney(eminem.ToGiveMoney());
 
+        int index;
+        std::cout << "What sell?" << std::endl;
+        std::cout << "1) Products." << std::endl;
+        std::cout << "2) Weapons." << std::endl;
+        std::cout << "3) Clothes." << std::endl;
+        std::cout << "4) Potions." << std::endl;
+        std::cout << "5) leave!" << std::endl;
+        std::cin >> index;
         eminem.ShowInventory();
         // Проработать лут + взятие оружия!
     } else {
