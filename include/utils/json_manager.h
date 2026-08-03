@@ -37,10 +37,10 @@ public:
     static std::vector<enemy> LoadEnemies(const std::string& file_name);
     // Читаем из weapons.json
     static std::vector<weapon> LoadWeapons(const std::string& file_name);
-    // // Читаем из potions.json
-    // static std::vector<potion> LoadPotions(const std::string& file_name);
-    // // Читаем из clothes.json
-    // static std::vector<clothes> LoadClothes(const std::string& file_name);
+    // Читаем из potions.json
+    static std::vector<potion> LoadPotions(const std::string& file_name);
+    // Читаем из clothes.json
+    static std::vector<clothes> LoadClothes(const std::string& file_name);
 
 
     // Сохранение в items.json

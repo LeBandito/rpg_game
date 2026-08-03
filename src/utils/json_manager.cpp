@@ -3,7 +3,6 @@
 #include <fstream>
 #include <iostream>
 
-
 // Перевод из Json в наши классы
 item JsonManager::FromJsonToItem(const json& data) {
     item bruh;
@@ -27,22 +26,16 @@ weapon JsonManager::FromJsonToWeapon(const json& data) {
 }
 
 player JsonManager::FromJsonToPlayer(const json& data) {
-    player bruh;
-
-    bruh.SetName(data["name"]);
-    bruh.SetHp(data["hp"]);
-    bruh.SetMaxHp(data["max_hp"]);
-    bruh.SetShield(data["shield"]);
-    bruh.SetMoney(data["money"]);
-    bruh.SetInventory(data["inventory"]);
-    bruh.SetMaxWeightInventory(data["max_weight_inventory"]);
-    bruh.SetAlive(data["alive"]);
-    bruh.SetPlayerWeaponFirst(FromJsonToWeapon(data["player_weapons_first"]));
-    bruh.SetPlayerWeaponSecond(FromJsonToWeapon(data["player_weapons_second"]));
-    bruh.SetPlayerWeapons(data["player_weapons_second"]);
-    bruh.SetWeightInventory(data["weight_inventory"]);
-
-    return bruh;
+    return player( data["id"],
+        data["name"],
+        data["alive"],
+        data["hp"],
+        data["max_hp"],
+        data["money"],
+        data["bag"],
+        data["player_weapon_first"],
+        data["player_weapon_second"]
+    );
 }
 
 enemy JsonManager::FromJsonToEnemy(const json& data) {

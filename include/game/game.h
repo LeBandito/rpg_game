@@ -30,15 +30,15 @@ public:
 
     // Игра
     int StartGameMenu();
-    void GetChooseOfStartMenu(const int& idx);
+    void GetChooseOfStartMenu();
     int ContinueGameMenu();
-    void GetChooseOfContinueMenu(const int& idx);
+    void GetChooseOfContinueMenu();
 
     // Сеттеры
     void SetBruh(const player& new_bruh);
     void SetEnemies(const std::vector<enemy>& new_enemies);
     void SetIdxEnemies(const int& new_idx_enemies);
-    // void SetShopper(const shop& new_shopper);
+    void SetShopper(const shop& new_shopper);
 
     // Геттеры
     player GetBruh() const;

@@ -11,7 +11,7 @@ add_executable(RPG_Game
     src/entities/player.cpp
     src/entities/enemy.cpp
     src/shop/shop.cpp
-    src/items/items.cpp
+    src/items/item.cpp
     src/items/weapons.cpp
     src/items/potions.cpp
     src/items/clothes.cpp

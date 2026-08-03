@@ -22,20 +22,15 @@ void game::CreatePlayer() {
     temporary.SetHp(20);
     temporary.SetMaxHp(25);
     temporary.SetMoney(10);
-    temporary.SetBag(
+
+    temporary.SetBag( 
         {
-            0, 0, 0, 0, 
+            1, 1, 0, 0, 
             10, 0, 
             3, 3, 2, 2, 
-            {
-                1, "apple", "just red apple...", 1
-            }, {
-                2, "knife", "just knife...", 5, 2, 5, 8, "none"
-            }, {
-
-            }, {
-
-            }
+            {item(1, "apple", "just red apple...", 1, 1)}, 
+            {weapon(2, "knife", "just knife...", 5, 2, 5, 8, 1)}, 
+            {clothes()}, {potion()}
         }
     );
 
@@ -57,6 +52,7 @@ void game::NewGame() {
     CreatePlayer();
     LoadGameEnemy();
     LoadGameShop();
+    ContinueGameMenu();
 }
 
 void game::ContinueGame() {
@@ -64,6 +60,7 @@ void game::ContinueGame() {
     LoadGamePlayer();
     LoadGameEnemy();
     LoadGameShop();
+    ContinueGameMenu();
 }
 
 void game::ExitGame() {
@@ -84,23 +81,27 @@ int game::StartGameMenu() {
     return temporary;
 }
 
-void game::GetChooseOfStartMenu(const int& idx) {
-    switch (idx)
-    {
-    case 1:
-        NewGame();
-        break;
-    
-    case 2:
-        ContinueGame();
-        break;
-    
-    case 3:
-        ExitGame();
-        break;
-    
-    default:
-        break;
+void game::GetChooseOfStartMenu() {
+    int choose(0);
+    while (choose != 3) {
+        choose = StartGameMenu();
+        switch (choose)
+        {
+        case 1:
+            NewGame();
+            break;
+        
+        case 2:
+            ContinueGame();
+            break;
+        
+        case 3:
+            ExitGame();
+            break;
+        
+        default:
+            break;
+        }
     }
 }
 
@@ -117,30 +118,35 @@ int game::ContinueGameMenu() {
     return temporary;
 }
 
-void game::GetChooseOfContinueMenu(const int& idx) {
-    switch (idx)
-    {
-    case 1:
-        battle game_battle(bruh, enemies[idx_enemies], 1, true);
-        game_battle.Fight();
-        ++idx_enemies;
-        break;
-    
-    case 2:
-        shopper.GameShopping();
-        break;
-    
-    case 3:
-        bruh.ShowStatistic();
-        bruh.ShowInventory();
-        break;
+void game::GetChooseOfContinueMenu() {
+    int choose(0);
+    while (choose != 4) {
+        choose = ContinueGameMenu();
+        switch (choose)
+        {
+        case 1:
+            battle game_battle(bruh, enemies[idx_enemies], 1, true, false);
+            game_battle.Fight();
+            ++idx_enemies;
+            break;
+        
+        case 2:
+            shopper.GameShopping(bruh);
+            break;
+        
+        case 3:
+            bruh.ShowStatistic();
+            bruh.ShowInventory();
+            break;
 
-    case 4:
-        ExitGame();
-        break;
-    
-    default:
-        break;
+        case 4:
+            ExitGame();
+            break;
+        
+        default:
+            std::cout << "Invalid choice. Try again." << std::endl;
+            break;
+        }
     }
 }
 
@@ -149,7 +155,7 @@ void game::GetChooseOfContinueMenu(const int& idx) {
 void game::SetBruh(const player& new_bruh) { bruh = new_bruh; }
 void game::SetEnemies(const std::vector<enemy>& new_enemies) { enemies = new_enemies; }
 void game::SetIdxEnemies(const int& new_idx_enemies) { idx_enemies = new_idx_enemies; }
-// void game::SetShopper(const shop& new_shopper) { shopper = new_shopper; }
+void game::SetShopper(const shop& new_shopper) { shopper = new_shopper; }
 
 // Геттеры
 player game::GetBruh() const { return bruh; }
