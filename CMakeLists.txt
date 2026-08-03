@@ -12,9 +12,10 @@ add_executable(RPG_Game
     src/entities/enemy.cpp
     src/shop/shop.cpp
     src/items/item.cpp
-    src/items/weapons.cpp
-    src/items/potions.cpp
-    src/items/clothes.cpp
+    src/items/weapon_template.cpp
+    src/items/potion_template.cpp
+    src/items/clothes_template.cpp
+    src/items/food_template.cpp
     src/utils/json_manager.cpp
     src/inventory/inventory.cpp
 )
